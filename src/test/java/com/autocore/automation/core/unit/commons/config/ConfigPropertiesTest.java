@@ -1,7 +1,9 @@
-package com.autocore.automation.core.commons.utils;
+package com.autocore.automation.core.unit.commons.config;
 
-import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
-import com.google.common.base.Preconditions;
+import com.autocore.automation.core.commons.Config;
+import com.autocore.automation.core.commons.utils.StringUtils;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -16,14 +18,12 @@ import com.google.common.base.Preconditions;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
- * Class stored with commonly used String functions.
- *
  */
-public class StringUtils {
+public class ConfigPropertiesTest {
 
-    public static String checkNotNull(String stringToCheck) {
-        Preconditions.checkNotNull(stringToCheck);
-
-        return stringToCheck;
+    @Test
+    public void testBrowserType(){
+        Assert.assertTrue(StringUtils.checkNotNull(Config.get().getProperty("browser.type"))
+                .equals("chrome"));
     }
 }
