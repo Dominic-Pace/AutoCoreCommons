@@ -40,7 +40,7 @@ public class Config {
         }
     }
 
-    public String getProperty(String propertyToRead) {
+    protected String getProperty(String propertyToRead) {
         if (properties == null) {
             readPropertiesFile();
         }

@@ -17,4 +17,11 @@ import com.autocore.automation.core.commons.Config;
  *
  */
 public class WebConfig extends Config {
+
+    public static WebConfig get() {
+        return new WebConfig();
+    }
+
+    public String getBrowserType() { return getProperty("browser.type"); }
+
 }

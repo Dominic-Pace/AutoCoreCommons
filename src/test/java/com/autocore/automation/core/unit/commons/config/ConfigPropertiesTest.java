@@ -1,7 +1,7 @@
 package com.autocore.automation.core.unit.commons.config;
 
-import com.autocore.automation.core.commons.Config;
 import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.web.WebConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -23,7 +23,7 @@ public class ConfigPropertiesTest {
 
     @Test
     public void testBrowserType(){
-        Assert.assertTrue(StringUtils.checkNotNull(Config.get().getProperty("browser.type"))
+        Assert.assertTrue(StringUtils.checkNotNull(WebConfig.get().getBrowserType())
                 .equals("chrome"));
     }
 }
