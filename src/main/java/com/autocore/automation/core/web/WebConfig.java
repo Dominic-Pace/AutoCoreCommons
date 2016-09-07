@@ -1,6 +1,7 @@
 package com.autocore.automation.core.web;
 
 import com.autocore.automation.core.commons.Config;
+import com.autocore.automation.core.commons.utils.StringUtils;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -22,6 +23,16 @@ public class WebConfig extends Config {
         return new WebConfig();
     }
 
-    public String getBrowserType() { return getProperty("browser.type"); }
+    public String getBrowserType() {
+        return StringUtils.checkNotNull(getProperty("browser.type")).toUpperCase();
+    }
+
+    public String getBrowserRunType() {
+        return StringUtils.checkNotNull(getProperty("browser.run.type"));
+    }
+
+    public String getGridURL() {
+        return StringUtils.checkNotNull(getProperty("selenium.grid.url"));
+    }
 
 }

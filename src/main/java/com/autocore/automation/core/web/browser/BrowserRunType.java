@@ -1,5 +1,10 @@
 package com.autocore.automation.core.web.browser;
 
+import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
+import com.autocore.automation.core.web.WebConfig;
+import com.sun.org.apache.regexp.internal.RE;
+
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
  *
@@ -15,4 +20,40 @@ package com.autocore.automation.core.web.browser;
  *
  */
 public enum BrowserRunType {
+
+    DIRECT("direct"),
+    REMOTE("remote");
+
+    private String browserRunType;
+
+    BrowserRunType (String browserRunType) {
+        this.browserRunType = browserRunType;
+    }
+
+    private static BrowserRunType getBrowserRunTypeEnum(String browserRunType) {
+
+        switch(BrowserRunType.valueOf(browserRunType.toUpperCase())) {
+
+            case DIRECT:
+                return DIRECT;
+
+            case REMOTE:
+                return REMOTE;
+
+            default:
+                throw new RuntimeInterruptionException("Could not read the browser run type: "
+                        + browserRunType);
+
+        }
+    }
+
+    public static String getBrowserRunType() {
+        return getBrowserRunTypeEnum(StringUtils.checkNotNull(WebConfig.get()
+                .getBrowserRunType())).toString();
+    }
+
+    @Override
+    public String toString() {
+        return browserRunType;
+    }
 }

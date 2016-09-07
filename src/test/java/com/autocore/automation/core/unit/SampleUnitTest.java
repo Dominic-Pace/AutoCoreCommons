@@ -1,5 +1,8 @@
 package com.autocore.automation.core.unit;
 
+import com.autocore.automation.core.web.browser.BrowserFactory;
+import org.testng.annotations.Test;
+
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
  *
@@ -15,4 +18,11 @@ package com.autocore.automation.core.unit;
  *
  */
 public class SampleUnitTest {
+
+    @Test
+    public void testBrowserInit() {
+        BrowserFactory browserFactory = new BrowserFactory();
+
+        browserFactory.getBrowserInstance();
+    }
 }

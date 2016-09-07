@@ -1,5 +1,11 @@
 package com.autocore.automation.core.web.browser;
 
+import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
+import com.autocore.automation.core.web.WebConfig;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
  *
@@ -15,4 +21,43 @@ package com.autocore.automation.core.web.browser;
  *
  */
 public class Capabilities {
+
+    public static DesiredCapabilities getBrowserCapabilites() {
+
+        DesiredCapabilities capabilities = null;
+        String browserType = WebConfig.get().getBrowserType();
+
+        switch (BrowserType.valueOf(browserType)) {
+
+            case FIREFOX:
+                capabilities = DesiredCapabilities.firefox();
+                FirefoxProfile profile = new FirefoxProfile();
+
+                profile.setAcceptUntrustedCertificates(false);
+                profile.setAssumeUntrustedCertificateIssuer(true);
+                profile.setPreference("browser.helperApps.alwaysAsk.force", false);
+
+                capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+                break;
+
+            case CHROME:
+                capabilities = DesiredCapabilities.chrome();
+
+                break;
+
+            case IE:
+                break;
+
+            case SAFARI:
+                break;
+
+            default:
+                throw new RuntimeInterruptionException("Cannot resolve the browser capabilties for "
+                        + "browser type: " + browserType);
+
+        }
+
+        return capabilities;
+    }
 }
