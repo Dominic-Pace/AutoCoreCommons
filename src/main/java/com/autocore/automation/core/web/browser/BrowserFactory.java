@@ -10,7 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -34,6 +38,10 @@ public class BrowserFactory {
     private WebConfig config = WebConfig.get();
     private WebDriver driver;
 
+    /**
+     * Method used to initialize a browser instance.
+     * @return WebDriver instnace.
+     */
     public WebDriver getBrowserInstance() {
 
         setBrowserType();
@@ -41,11 +49,22 @@ public class BrowserFactory {
 
         if (browserRunType.equals("direct")) {
             driver = initDirectDriver(Capabilities.getBrowserCapabilites(), browserType);
+        } else if (browserRunType.equals("remote")) {
+            driver = initRemoteWebDriver(Capabilities.getBrowserCapabilites());
+        } else {
+            throw new RuntimeInterruptionException("Could not initialize a browser.");
         }
 
         return driver;
     }
 
+    /**
+     * Method used to initialize a direct webdriver instance.
+     *
+     * @param capabilities of the direct driver.
+     * @param browserType to be used.
+     * @return WebDriver instance.
+     */
     private WebDriver initDirectDriver(DesiredCapabilities capabilities, String browserType) {
 
         switch(BrowserType.valueOf(browserType.toUpperCase())) {
@@ -76,11 +95,38 @@ public class BrowserFactory {
         return driver;
     }
 
+    /**
+     * Method used to initialize a remote webdriver instance.
+     *
+     * @param capabilities of the remote driver.
+     * @return WebDriver instance.
+     */
+    private WebDriver initRemoteWebDriver(DesiredCapabilities capabilities) {
+
+        try {
+
+            URL url = new URL(config.getGridURL());
+            driver = new RemoteWebDriver(url, capabilities);
+        } catch(MalformedURLException e) {
+
+            throw new RuntimeInterruptionException(
+                    "Cannot initialize a Remote WebDriver instance.");
+        }
+
+        return driver;
+    }
+
+    /**
+     * Method used to set the browser type.
+     */
     private void setBrowserType() {
         this.browserType = StringUtils.checkNotNull(BrowserType.getBrowserType());
 
     }
 
+    /**
+     * Method used to set the browser run type.
+     */
     private void setBrowserRunType() {
         this.browserRunType = StringUtils.checkNotNull(BrowserRunType.getBrowserRunType());
     }
