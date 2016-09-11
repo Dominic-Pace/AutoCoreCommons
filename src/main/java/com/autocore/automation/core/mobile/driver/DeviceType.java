@@ -1,5 +1,8 @@
 package com.autocore.automation.core.mobile.driver;
 
+import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
+import com.autocore.automation.core.mobile.MobileConfig;
+
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
  *
@@ -14,5 +17,40 @@ package com.autocore.automation.core.mobile.driver;
  * Lesser General Public License for more details.
  *
  */
-public class DeviceType {
+public enum DeviceType {
+
+    IOS("ios"),
+    ANDROID("android");
+
+    private String deviceType;
+
+    DeviceType (String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    private static DeviceType getDeviceTypeEnum(String deviceType) {
+
+        switch(DeviceType.valueOf(deviceType)) {
+
+            case IOS:
+                return IOS;
+
+            case ANDROID:
+                return ANDROID;
+
+            default:
+                throw new RuntimeInterruptionException("Could not read the device type: "
+                        + deviceType);
+
+        }
+    }
+
+    public static String getDeviceType() {
+        return getDeviceTypeEnum(MobileConfig.get().getMobileDeviceType()).toString();
+    }
+
+    @Override
+    public String toString() {
+        return deviceType;
+    }
 }

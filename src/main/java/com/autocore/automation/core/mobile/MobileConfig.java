@@ -1,6 +1,8 @@
 package com.autocore.automation.core.mobile;
 
 import com.autocore.automation.core.commons.Config;
+import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.web.WebConfig;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -17,4 +19,12 @@ import com.autocore.automation.core.commons.Config;
  *
  */
 public class MobileConfig extends Config {
+
+    public static MobileConfig get() {
+        return new MobileConfig();
+    }
+
+    public String getMobileDeviceType() {
+        return StringUtils.checkNotNull(getProperty("mobile.device.type")).toUpperCase();
+    }
 }
