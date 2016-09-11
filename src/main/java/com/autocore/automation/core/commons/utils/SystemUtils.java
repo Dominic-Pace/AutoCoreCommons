@@ -1,7 +1,5 @@
 package com.autocore.automation.core.commons.utils;
 
-import com.google.common.base.Preconditions;
-
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
  *
@@ -15,14 +13,12 @@ import com.google.common.base.Preconditions;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
- * Class stored with commonly used String functions.
+ * Class stored with commonly used System functions.
  *
  */
-public class StringUtils {
+public class SystemUtils {
 
-    public static String checkNotNull(String stringToCheck) {
-        Preconditions.checkNotNull(stringToCheck);
-
-        return stringToCheck;
+    public static String getProjectPath() {
+        return StringUtils.checkNotNull(System.getProperty("user.dir"));
     }
 }

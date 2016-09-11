@@ -1,6 +1,7 @@
 package com.autocore.automation.core.commons;
 
 import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.commons.utils.SystemUtils;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
 
 import java.io.*;
@@ -48,8 +49,16 @@ public class Config {
     }
 
     private String getConfigPropertiesFilePath() {
-        return StringUtils.checkNotNull(System.getProperty("user.dir") + File.separator
+        return StringUtils.checkNotNull(SystemUtils.getProjectPath() + File.separator
                 + "src" + File.separator + "main" + File.separator + "resources" + File.separator
                 + configPropertiesFileName);
+    }
+
+    public String getBrowserRunType() {
+        return StringUtils.checkNotNull(getProperty("driver.run.type"));
+    }
+
+    public String getGridURL() {
+        return StringUtils.checkNotNull(getProperty("selenium.grid.url"));
     }
 }

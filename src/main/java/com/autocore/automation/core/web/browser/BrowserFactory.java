@@ -1,6 +1,5 @@
 package com.autocore.automation.core.web.browser;
 
-import com.autocore.automation.core.commons.utils.StringUtils;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
 import com.autocore.automation.core.web.WebConfig;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -33,7 +32,6 @@ import java.net.URL;
  */
 public class BrowserFactory {
 
-    private String browserType;
     private String browserRunType;
     private WebConfig config = WebConfig.get();
     private WebDriver driver;
@@ -44,11 +42,10 @@ public class BrowserFactory {
      */
     public WebDriver getBrowserInstance() {
 
-        setBrowserType();
         setBrowserRunType();
 
         if (browserRunType.equals("direct")) {
-            driver = initDirectDriver(Capabilities.getBrowserCapabilites(), browserType);
+            driver = initDirectDriver(Capabilities.getBrowserCapabilites());
         } else if (browserRunType.equals("remote")) {
             driver = initRemoteWebDriver(Capabilities.getBrowserCapabilites());
         } else {
@@ -62,11 +59,11 @@ public class BrowserFactory {
      * Method used to initialize a direct webdriver instance.
      *
      * @param capabilities of the direct driver.
-     * @param browserType to be used.
      * @return WebDriver instance.
      */
-    private WebDriver initDirectDriver(DesiredCapabilities capabilities, String browserType) {
+    private WebDriver initDirectDriver(DesiredCapabilities capabilities) {
 
+        String browserType = config.getBrowserType();
         switch(BrowserType.valueOf(browserType.toUpperCase())) {
 
             case FIREFOX:
@@ -117,18 +114,10 @@ public class BrowserFactory {
     }
 
     /**
-     * Method used to set the browser type.
-     */
-    private void setBrowserType() {
-        this.browserType = StringUtils.checkNotNull(BrowserType.getBrowserType());
-
-    }
-
-    /**
      * Method used to set the browser run type.
      */
     private void setBrowserRunType() {
-        this.browserRunType = StringUtils.checkNotNull(BrowserRunType.getBrowserRunType());
+        this.browserRunType = BrowserRunType.getBrowserRunType();
     }
 
 }

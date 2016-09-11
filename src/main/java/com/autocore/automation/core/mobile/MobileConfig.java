@@ -27,4 +27,24 @@ public class MobileConfig extends Config {
     public String getMobileDeviceType() {
         return StringUtils.checkNotNull(getProperty("mobile.device.type")).toUpperCase();
     }
+
+    public String getAppiumServerURL() {
+        return StringUtils.checkNotNull(getProperty("appium.server.url"));
+    }
+
+    public String getPlatformVersion() {
+        return StringUtils.checkNotNull(getProperty("platform.version"));
+    }
+
+    public String getDeviceName() {
+        return StringUtils.checkNotNull(getProperty("device.name"));
+    }
+
+    public String getMobileAppName() {
+        return StringUtils.checkNotNull(getProperty("mobile.app.name"));
+    }
+
+    public String getAppiumVersion() {
+        return StringUtils.checkNotNull(getProperty("appium.version"));
+    }
 }

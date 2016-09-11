@@ -26,13 +26,4 @@ public class WebConfig extends Config {
     public String getBrowserType() {
         return StringUtils.checkNotNull(getProperty("browser.type")).toUpperCase();
     }
-
-    public String getBrowserRunType() {
-        return StringUtils.checkNotNull(getProperty("browser.run.type"));
-    }
-
-    public String getGridURL() {
-        return StringUtils.checkNotNull(getProperty("selenium.grid.url"));
-    }
-
 }
