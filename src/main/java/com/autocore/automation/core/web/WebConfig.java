@@ -23,6 +23,11 @@ public class WebConfig extends Config {
         return new WebConfig();
     }
 
+    /**
+     * Method used to get the Browser Type.
+     *
+     * @return String representation of the browser type.
+     */
     public String getBrowserType() {
         return StringUtils.checkNotNull(getProperty("browser.type")).toUpperCase();
     }

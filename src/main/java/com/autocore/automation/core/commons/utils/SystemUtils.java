@@ -18,6 +18,11 @@ package com.autocore.automation.core.commons.utils;
  */
 public class SystemUtils {
 
+    /**
+     * Method used to get the project path.
+     *
+     * @return String representation of the project path on local machine.
+     */
     public static String getProjectPath() {
         return StringUtils.checkNotNull(System.getProperty("user.dir"));
     }

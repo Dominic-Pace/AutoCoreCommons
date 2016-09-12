@@ -30,6 +30,9 @@ public class Config {
         return new Config();
     }
 
+    /**
+     *  Method used to read the config property file.
+     */
     private void readPropertiesFile()  {
         properties = new Properties();
 
@@ -41,6 +44,12 @@ public class Config {
         }
     }
 
+    /**
+     * Method used to read a property from the config property file.
+     *
+     * @param propertyToRead name of property to read
+     * @return String value of the property.
+     */
     protected String getProperty(String propertyToRead) {
         if (properties == null) {
             readPropertiesFile();
@@ -48,16 +57,31 @@ public class Config {
         return StringUtils.checkNotNull(properties.getProperty(propertyToRead));
     }
 
+    /**
+     * Method used to get the Config Property File Path.
+     *
+     * @return String representation of the config property file path
+     */
     private String getConfigPropertiesFilePath() {
         return StringUtils.checkNotNull(SystemUtils.getProjectPath() + File.separator
                 + "src" + File.separator + "main" + File.separator + "resources" + File.separator
                 + configPropertiesFileName);
     }
 
-    public String getBrowserRunType() {
+    /**
+     * Method used to get the driver run type.
+     *
+     * @return String representation of the driver run type
+     */
+    public String getDriverRunType() {
         return StringUtils.checkNotNull(getProperty("driver.run.type"));
     }
 
+    /**
+     * Method used to get the GRID URL.
+     *
+     * @return String representation of the selenium grid URL.
+     */
     public String getGridURL() {
         return StringUtils.checkNotNull(getProperty("selenium.grid.url"));
     }

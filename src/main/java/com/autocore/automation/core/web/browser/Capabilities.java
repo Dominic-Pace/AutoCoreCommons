@@ -27,6 +27,11 @@ import java.util.Collections;
  */
 public class Capabilities {
 
+    /**
+     * Method used to get the Browser Capability based on device type.
+     *
+     * @return the browser capability
+     */
     public static DesiredCapabilities getBrowserCapabilites() {
 
         DesiredCapabilities capabilities = null;

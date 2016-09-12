@@ -28,6 +28,12 @@ public enum DeviceType {
         this.deviceType = deviceType;
     }
 
+    /**
+     * Method used to get device type Enumeration.
+     *
+     * @param deviceType name.
+     * @return Enumeration value of DeviceType
+     */
     private static DeviceType getDeviceTypeEnum(String deviceType) {
 
         switch(DeviceType.valueOf(deviceType)) {
@@ -45,6 +51,11 @@ public enum DeviceType {
         }
     }
 
+    /**
+     * Method used to get the device type.
+     *
+     * @return String representation of the device type.
+     */
     public static String getDeviceType() {
         return getDeviceTypeEnum(MobileConfig.get().getMobileDeviceType()).toString();
     }

@@ -31,6 +31,12 @@ public enum BrowserType {
         this.browserType = browserType;
     }
 
+    /**
+     * Method used to get the browser type.
+     *
+     * @param browserType name of browser.
+     * @return Enumeration value of the browser type.
+     */
     private static BrowserType getBrowserTypeEnum(String browserType) {
 
         switch(BrowserType.valueOf(browserType)) {
@@ -54,6 +60,11 @@ public enum BrowserType {
         }
     }
 
+    /**
+     * Method used to get the browser type.
+     *
+     * @return String representation of browser type.
+     */
     public static String getBrowserType() {
         return getBrowserTypeEnum(WebConfig.get().getBrowserType()).toString();
     }

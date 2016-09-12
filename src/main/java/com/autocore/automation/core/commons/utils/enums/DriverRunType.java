@@ -1,9 +1,8 @@
-package com.autocore.automation.core.web.browser;
+package com.autocore.automation.core.commons.utils.enums;
 
 import com.autocore.automation.core.commons.utils.StringUtils;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
 import com.autocore.automation.core.web.WebConfig;
-import com.sun.org.apache.regexp.internal.RE;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -19,20 +18,26 @@ import com.sun.org.apache.regexp.internal.RE;
  * Lesser General Public License for more details.
  *
  */
-public enum BrowserRunType {
+public enum DriverRunType {
 
     DIRECT("direct"),
     REMOTE("remote");
 
-    private String browserRunType;
+    private String driverRunType;
 
-    BrowserRunType (String browserRunType) {
-        this.browserRunType = browserRunType;
+    DriverRunType(String driverRunType) {
+        this.driverRunType = driverRunType;
     }
 
-    private static BrowserRunType getBrowserRunTypeEnum(String browserRunType) {
+    /**
+     * Method used to get the driver run type.
+     * 
+     * @param driverRunType
+     * @return
+     */
+    private static DriverRunType getDriverRunTypeEnum(String driverRunType) {
 
-        switch(BrowserRunType.valueOf(browserRunType.toUpperCase())) {
+        switch(DriverRunType.valueOf(driverRunType.toUpperCase())) {
 
             case DIRECT:
                 return DIRECT;
@@ -41,19 +46,24 @@ public enum BrowserRunType {
                 return REMOTE;
 
             default:
-                throw new RuntimeInterruptionException("Could not read the browser run type: "
-                        + browserRunType);
+                throw new RuntimeInterruptionException("Could not read the driver run type: "
+                        + driverRunType);
 
         }
     }
 
-    public static String getBrowserRunType() {
-        return getBrowserRunTypeEnum(StringUtils.checkNotNull(WebConfig.get()
-                .getBrowserRunType())).toString();
+    /**
+     * Method used to get the driver run type.
+     * 
+     * @return String representation of the driver run type.
+     */
+    public static String getDriverRunType() {
+        return getDriverRunTypeEnum(StringUtils.checkNotNull(WebConfig.get()
+                .getDriverRunType())).toString();
     }
 
     @Override
     public String toString() {
-        return browserRunType;
+        return driverRunType;
     }
 }

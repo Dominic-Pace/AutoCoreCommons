@@ -27,7 +27,12 @@ public class Capabilities {
 
     private static MobileConfig config = MobileConfig.get();
 
-    public static DesiredCapabilities getCapabilities() {
+    /**
+     * Method used to get the Mobile Capability based on device type.
+     *
+     * @return the mobile capability
+     */
+    public static DesiredCapabilities getMobileCapabilities() {
 
         DesiredCapabilities capabilities = null;
         String deviceType = MobileConfig.get().getMobileDeviceType();
@@ -68,6 +73,11 @@ public class Capabilities {
         return capabilities;
     }
 
+    /**
+     * Method used to get the mobile app path.
+     *
+     * @return String representation of the mobile app path
+     */
     private static String getAppPath() {
         return StringUtils.checkNotNull(SystemUtils.getProjectPath() + File.separator
                 + "src" + File.separator + "main" + File.separator + "resources" + File.separator

@@ -1,5 +1,6 @@
 package com.autocore.automation.core.web.browser;
 
+import com.autocore.automation.core.commons.utils.enums.DriverRunType;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
 import com.autocore.automation.core.web.WebConfig;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -117,7 +118,7 @@ public class BrowserFactory {
      * Method used to set the browser run type.
      */
     private void setBrowserRunType() {
-        this.browserRunType = BrowserRunType.getBrowserRunType();
+        this.browserRunType = DriverRunType.getDriverRunType();
     }
 
 }

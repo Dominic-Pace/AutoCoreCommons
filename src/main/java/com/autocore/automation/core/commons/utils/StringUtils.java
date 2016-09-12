@@ -20,7 +20,14 @@ import com.google.common.base.Preconditions;
  */
 public class StringUtils {
 
+    /**
+     * Method used to check a String is not null
+     *
+     * @param stringToCheck some String to check
+     * @return String representation of String passed in.
+     */
     public static String checkNotNull(String stringToCheck) {
+
         Preconditions.checkNotNull(stringToCheck);
 
         return stringToCheck;

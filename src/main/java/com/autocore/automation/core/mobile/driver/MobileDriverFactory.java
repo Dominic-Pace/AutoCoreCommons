@@ -1,9 +1,9 @@
 package com.autocore.automation.core.mobile.driver;
 
 import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.commons.utils.enums.DriverRunType;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
 import com.autocore.automation.core.mobile.MobileConfig;
-import com.autocore.automation.core.web.browser.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -41,7 +41,7 @@ public class MobileDriverFactory {
     public AppiumDriver getAppiumDeviceInstance() {
 
         if (driverRunType.equals("direct")) {
-            driver = initDirectAppiumDriver(Capabilities.getCapabilities());
+            driver = initDirectAppiumDriver(Capabilities.getMobileCapabilities());
         } else if (driverRunType.equals("remote")) {
             throw new NotImplementedException("Remote Driver Type for Mobile Device testing has "
                     + "yet to be implemented.");
@@ -92,7 +92,7 @@ public class MobileDriverFactory {
      * Method used to set the driver run type.
      */
     private void setDriverRunType() {
-        this.driverRunType = StringUtils.checkNotNull(BrowserRunType.getBrowserRunType());
+        this.driverRunType = StringUtils.checkNotNull(DriverRunType.getDriverRunType());
     }
 
 }
