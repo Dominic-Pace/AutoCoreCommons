@@ -85,4 +85,13 @@ public class Config {
     public String getGridURL() {
         return StringUtils.checkNotNull(getProperty("selenium.grid.url"));
     }
+
+    /**
+     * Method used to get the default timeout
+     *
+     * @return integer representation of the default timeout time.
+     */
+    public int getDefaultTimeout() {
+        return Integer.parseInt(StringUtils.checkNotNull(getProperty("timeout.time")));
+    }
 }
