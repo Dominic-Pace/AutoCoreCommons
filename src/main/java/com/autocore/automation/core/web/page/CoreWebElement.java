@@ -92,15 +92,48 @@ public class CoreWebElement {
 
     /**
      * Method used to click on a web element.
-     *
-     * @return CoreWebElement instance
      */
-    public CoreWebElement click() {
+    public void click() {
         Preconditions.checkNotNull(element);
 
         this.element.click();
 
+    }
+
+    /**
+     * Method used to send text to a web element.
+     */
+    public void sendText(String textToSend) {
+        Preconditions.checkNotNull(element);
+        Preconditions.checkNotNull(textToSend);
+
+        this.element.sendKeys(textToSend);
+
+
+    }
+
+    /**
+     * Method used to clear a web element.
+     *
+     * @return CoreWebElement instance.
+     */
+    public CoreWebElement clear() {
+        Preconditions.checkNotNull(element);
+
+        this.element.clear();
+
         return this;
+    }
+
+    /**
+     * Method used to send text to a web element.
+     */
+    public void clearAndSendText(String textToSend) {
+        Preconditions.checkNotNull(element);
+        Preconditions.checkNotNull(textToSend);
+
+        this.element.clear();
+        this.element.sendKeys(textToSend);
 
     }
 }
