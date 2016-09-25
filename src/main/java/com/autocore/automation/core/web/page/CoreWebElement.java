@@ -97,6 +97,33 @@ public class CoreWebElement {
     }
 
     /**
+     * Method used for waiting for an element to be clickable.
+     *
+     * @return Core Web Element instance
+     */
+    public CoreWebElement waitForElementToBeClickable() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wait.withTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .pollingEvery(sleepTime, TimeUnit.MILLISECONDS)
+                .until(ExpectedConditions.elementToBeClickable(byLocator));
+        return this;
+    }
+
+    /**
+     * Method used for waiting for an element to be clickable with a custom timeout.
+     *
+     * @param timeout custom timeout time.
+     * @return Core Web Element instance
+     */
+    public CoreWebElement waitForElementToBeClickable(int timeout) {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wait.withTimeout(timeout, TimeUnit.SECONDS)
+                .pollingEvery(sleepTime, TimeUnit.MILLISECONDS)
+                .until(ExpectedConditions.elementToBeClickable(byLocator));
+        return this;
+    }
+
+    /**
      * Method used to click on a web element.
      */
     public void click() {
