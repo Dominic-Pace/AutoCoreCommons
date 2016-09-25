@@ -40,8 +40,8 @@ public class CoreWebElement {
      * @param driver - WebDriver instance
      */
     public CoreWebElement(By byLocator, WebDriver driver) {
-        this.byLocator = byLocator;
-        this.driver = driver;
+        this.byLocator = Preconditions.checkNotNull(byLocator);
+        this.driver = Preconditions.checkNotNull(driver);
         if (wait == null) {
             wait = new WebDriverWait(driver, DEFAULT_TIMEOUT, sleepTime)
                     .ignoring(WebDriverException.class);
@@ -62,14 +62,17 @@ public class CoreWebElement {
      *
      * @param byLocator - the by locator used to define the element
      * @param driver - WebDriver instance
-     * @return CoreWebElement element
+     * @return CoreWebElement instance
      */
-    public static CoreWebElement getCoreElement(By byLocator, WebDriver driver) {
+    protected static CoreWebElement getCoreElement(By byLocator, WebDriver driver) {
         return new CoreWebElement(byLocator, driver);
+
     }
 
     /**
      * Method used for waiting for an element to be visible.
+     *
+     * @return Core Web Element instance
      */
     public CoreWebElement waitForElementToBeVisible() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -81,6 +84,9 @@ public class CoreWebElement {
 
     /**
      * Method used for waiting for an element to be visible with a custom timeout.
+     *
+     * @param timeout custom timeout time.
+     * @return Core Web Element instance
      */
     public CoreWebElement waitForElementToBeVisible(int timeout) {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -94,8 +100,6 @@ public class CoreWebElement {
      * Method used to click on a web element.
      */
     public void click() {
-        Preconditions.checkNotNull(element);
-
         this.element.click();
 
     }
@@ -104,34 +108,26 @@ public class CoreWebElement {
      * Method used to send text to a web element.
      */
     public void sendText(String textToSend) {
-        Preconditions.checkNotNull(element);
-        Preconditions.checkNotNull(textToSend);
-
         this.element.sendKeys(textToSend);
-
 
     }
 
     /**
-     * Method used to clear a web element.
+     * Method used to clear a web element of all text or information.
      *
      * @return CoreWebElement instance.
      */
     public CoreWebElement clear() {
-        Preconditions.checkNotNull(element);
-
         this.element.clear();
 
         return this;
+
     }
 
     /**
      * Method used to send text to a web element.
      */
     public void clearAndSendText(String textToSend) {
-        Preconditions.checkNotNull(element);
-        Preconditions.checkNotNull(textToSend);
-
         this.element.clear();
         this.element.sendKeys(textToSend);
 

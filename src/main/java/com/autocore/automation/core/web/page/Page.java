@@ -1,6 +1,10 @@
 package com.autocore.automation.core.web.page;
 
 import com.autocore.automation.core.commons.Config;
+import com.autocore.automation.core.commons.utils.StringUtils;
+import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
+import com.google.common.base.Preconditions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -23,13 +27,54 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Page {
 
     protected WebDriver driver;
+    protected String url;
     protected Config config = Config.get();
     private WebDriverWait wait;
 
     protected final int DEFAULT_TIMEOUT = config.getDefaultTimeout();
 
     public Page(WebDriver driver) {
-        this.driver = driver;
+        this.driver = Preconditions.checkNotNull(driver);
+    }
+
+    public Page(WebDriver driver, String url) {
+        this.driver = Preconditions.checkNotNull(driver);
+        this.url = StringUtils.checkNotNull(url);
+
+        driver.get(url);
+    }
+
+    /**
+     * Method used to wait for the Page Complete Load State with JavaScript Executor.
+     */
+    public void waitForPageCompleteState() {
+        try {
+            new WebDriverWait(driver, DEFAULT_TIMEOUT).until((ExpectedCondition<Boolean>) wd ->
+                    ((JavascriptExecutor) wd).executeScript("return document.readyState")
+                            .equals("complete"));
+        } catch(NullPointerException e) {
+            throw new RuntimeInterruptionException("Could not wait for the page complete state.");
+        }
+    }
+
+    /**
+     * Method used to wait for the Page Complete Load State with JavaScript Executor via custom
+     * timeout.
+     *
+     * @param customTimeout integer representation of a custom timeout.
+     */
+    public void waitForPageCompleteState(int customTimeout) {
+        try {
+        new WebDriverWait(driver, customTimeout).until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState")
+                        .equals("complete"));
+        } catch(NullPointerException e) {
+            throw new RuntimeInterruptionException("Could not wait for the page complete state.");
+        }
+    }
+
+    public CoreWebElement getCoreElement(By byLocator) {
+        return Preconditions.checkNotNull(CoreWebElement.getCoreElement(byLocator, driver));
     }
 
     /**
@@ -40,23 +85,9 @@ public class Page {
     }
 
     /**
-     * Method used to wait for the Page Complete Load State with JavaScript Executor.
+     * Method used to click the back button on the browser.
      */
-    public void waitForPageCompleteState() {
-        new WebDriverWait(driver, DEFAULT_TIMEOUT).until((ExpectedCondition<Boolean>) wd ->
-                ((JavascriptExecutor) wd).executeScript("return document.readyState")
-                        .equals("complete"));
-    }
-
-    /**
-     * Method used to wait for the Page Complete Load State with JavaScript Executor via custom
-     * timeout.
-     *
-     * @param customTimeout integer representation of a custom timeout.
-     */
-    public void waitForPageCompleteState(int customTimeout) {
-        new WebDriverWait(driver, customTimeout).until((ExpectedCondition<Boolean>) wd ->
-                ((JavascriptExecutor) wd).executeScript("return document.readyState")
-                        .equals("complete"));
+    public void clickBrowserBackButton() {
+        driver.navigate().back();
     }
 }
