@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -132,10 +133,20 @@ public class CoreWebElement {
     }
 
     /**
-     * Method used to send text to a web element.
+     * Method used to click on a web element.
      */
-    public void sendText(String textToSend) {
-        this.element.sendKeys(textToSend);
+    public void click(CharSequence... var1) {
+        this.element.click();
+
+    }
+
+    /**
+     * Method used to send text to a web element.
+     *
+     * @param var1 - variable to send to element
+     */
+    public void sendText(CharSequence... var1) {
+        this.element.sendKeys(var1);
 
     }
 
@@ -158,5 +169,112 @@ public class CoreWebElement {
         this.element.clear();
         this.element.sendKeys(textToSend);
 
+    }
+
+    /**
+     * Method used to get the tag name of a web element.
+     */
+    public String getTagName() {
+        return this.element.getTagName();
+
+    }
+
+    /**
+     * Method used to get the attribute name of a web element.
+     *
+     * @param str - String to get attribute of.
+     */
+    public String getAttribute(String str) {
+        return this.element.getAttribute(str);
+
+    }
+
+    /**
+     * Method used to determine if an element is selectable or not.
+     *
+     * @return if the element is selectable or not
+     */
+    public boolean isSelected() {
+        return this.element.isSelected();
+    }
+
+    /**
+     * Method used to determine if an element is displayed or not.
+     *
+     * @return if the element is displayed or not
+     */
+    public boolean isDisplayed() {
+        return this.element.isDisplayed();
+    }
+
+    /**
+     * Method used to determine if an element is enabled or not.
+     *
+     * @return if the element is enabled or not
+     */
+    public boolean isEnabled() {
+        return this.element.isEnabled();
+    }
+
+    /**
+     * Method used to determine if an element is clickable or not.
+     *
+     * @return if the element is clickable or not
+     */
+    public boolean isClickable() {
+        return this.element.isDisplayed() && this.element.isEnabled();
+    }
+
+    /**
+     * Method used to get the text of an element.
+     *
+     * @return representation of the text of an element
+     */
+    public String getText() {
+        return this.element.getText();
+    }
+
+    public <T extends WebElement> List<T> findElements(By var1) {
+        return this.element.findElements(var1);
+    }
+
+    public <T extends WebElement> T findElement(By var1) {
+        return this.element.findElement(var1);
+    }
+
+    /**
+     * Method used to get the location of an element
+     *
+     * @return location of the element
+     */
+    public Point getLocation() {
+        return this.element.getLocation();
+    }
+
+    /**
+     * Method used to get the size of an element
+     *
+     * @return size of the element
+     */
+    public Dimension getSize() {
+        return this.element.getSize();
+    }
+
+    /**
+     * Method used to get the rectangle of an element
+     *
+     * @return rectangle of the element
+     */
+    public Rectangle getRect() {
+        return this.element.getRect();
+    }
+
+    /**
+     * Method used to get the CSS Value of an element
+     *
+     * @return css value of the element
+     */
+    public String getCssValue(String s) {
+        return this.element.getCssValue(s);
     }
 }
