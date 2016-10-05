@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.autocore.automation.core</groupId>
+    <groupId>org.autocore.javacore</groupId>
     <artifactId>autocore-commons</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
@@ -22,6 +22,7 @@
 
     <properties>
         <appium.java.version>4.1.2</appium.java.version>
+        <http.components.version>4.5.2</http.components.version>
         <selenium.version>2.53.0</selenium.version>
         <testng.version>6.9.10</testng.version>
         <webdriver.manager.version>1.4.8</webdriver.manager.version>
@@ -33,6 +34,12 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${http.components.version}</version>
         </dependency>
 
         <dependency>
