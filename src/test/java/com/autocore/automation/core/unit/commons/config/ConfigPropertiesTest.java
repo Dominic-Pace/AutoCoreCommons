@@ -24,6 +24,6 @@ public class ConfigPropertiesTest {
     @Test
     public void testBrowserType(){
         Assert.assertTrue(StringUtils.checkNotNull(WebConfig.get().getBrowserType())
-                .equals("chrome"));
+                .equals("CHROME"));
     }
 }
