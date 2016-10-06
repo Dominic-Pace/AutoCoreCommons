@@ -94,4 +94,13 @@ public class Config {
     public int getDefaultTimeout() {
         return Integer.parseInt(StringUtils.checkNotNull(getProperty("timeout.time")));
     }
+
+    /**
+     * Method used to get the base URL.
+     *
+     * @return String representation of the URL.
+     */
+    public String getBaseURL() {
+        return StringUtils.checkNotNull(getProperty("base.url"));
+    }
 }
