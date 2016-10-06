@@ -1,11 +1,6 @@
-package com.autocore.automation.core.web;
+package com.autocore.automation.core.commons.utils;
 
-import com.autocore.automation.core.commons.utils.BaseCoreTest;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
-import com.autocore.automation.core.web.browser.BrowserFactory;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
@@ -24,35 +19,16 @@ import java.lang.reflect.Method;
  * Lesser General Public License for more details.
  *
  */
-public class CoreTest extends BaseCoreTest {
-
-    protected WebDriver driver;
+public class BaseCoreTest {
 
     /**
-     * Method used to initialize the browser before the test.
-     */
-    @BeforeTest
-    public void initBrowserBeforeTest() {
-        BrowserFactory browserFactory = new BrowserFactory();
-        driver = browserFactory.getBrowserInstance();
-    }
-
-    /**
-     * Method used to initialize the browser after the test.
-     */
-    @AfterTest
-    public void closeBrowserAfterTest() {
-        driver.close();
-    }
-
-    /**
-     * DataProvider to return a Json Parsing class.
+     * DataProvider to return the parent class instance.
      *
      * @param superMethod Test method invoking this method.
-     * @return Object array
+     * @return instance of the super methods parameter
      */
-    @DataProvider(name = "JsonDataProvider")
-    protected static Object[][] getJsonDataModel(Method superMethod) {
+    @DataProvider(name = "CoreDataProvider")
+    protected static Object[][] getCoreDataProvider(Method superMethod) {
         try {
             return new Object[][]{{superMethod.getParameterTypes()[0].newInstance()}};
         } catch (Exception e) {

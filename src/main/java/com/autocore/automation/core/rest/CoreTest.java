@@ -1,10 +1,10 @@
-package com.autocore.automation.core.web;
+package com.autocore.automation.core.rest;
 
 import com.autocore.automation.core.commons.utils.BaseCoreTest;
 import com.autocore.automation.core.commons.utils.exception.RuntimeInterruptionException;
-import com.autocore.automation.core.web.browser.BrowserFactory;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
@@ -26,24 +26,16 @@ import java.lang.reflect.Method;
  */
 public class CoreTest extends BaseCoreTest {
 
-    protected WebDriver driver;
+    protected CloseableHttpClient client;
 
     /**
      * Method used to initialize the browser before the test.
      */
     @BeforeTest
-    public void initBrowserBeforeTest() {
-        BrowserFactory browserFactory = new BrowserFactory();
-        driver = browserFactory.getBrowserInstance();
+    public void initClientInstanceBeforeTest() {
+        client = HttpClients.createDefault();
     }
 
-    /**
-     * Method used to initialize the browser after the test.
-     */
-    @AfterTest
-    public void closeBrowserAfterTest() {
-        driver.close();
-    }
 
     /**
      * DataProvider to return a Json Parsing class.
