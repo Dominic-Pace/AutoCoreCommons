@@ -1,5 +1,6 @@
 package org.autocore.java.rest;
 
+import org.apache.http.HttpResponse;
 import org.autocore.java.commons.utils.BaseCoreTest;
 import org.autocore.java.commons.utils.exception.RuntimeInterruptionException;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,6 +27,7 @@ import java.io.IOException;
 public class CoreTest extends BaseCoreTest {
 
     protected CloseableHttpClient httpClient;
+    protected HttpResponse res;
 
     /**
      * Method used to initialize the client instance before the test.

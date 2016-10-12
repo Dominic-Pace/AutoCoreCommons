@@ -1,8 +1,10 @@
 package org.autocore.java.commons.utils;
 
 import org.autocore.java.commons.utils.exception.RuntimeInterruptionException;
+import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 /**
@@ -21,6 +23,9 @@ import java.lang.reflect.Method;
  */
 public class BaseCoreTest {
 
+    private static final String TEST_DATA_LOCATION = File.separator + "testdata" + File.separator;
+    private static final String JSON_EXTENSION = ".json";
+
     /**
      * DataProvider to return the parent class instance.
      *
@@ -28,9 +33,16 @@ public class BaseCoreTest {
      * @return instance of the super methods parameter
      */
     @DataProvider(name = "CoreDataProvider")
-    protected static Object[][] getCoreDataProvider(Method superMethod) {
+    protected static Object[][] getCoreDataProvider(Method superMethod, ITestContext context) {
         try {
-            return new Object[][]{{superMethod.getParameterTypes()[0].newInstance()}};
+            JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
+                    + context.getName() + JSON_EXTENSION);
+
+            Object newUser = jsonUtils.createObjectFromJsonFile(superMethod
+                    .getParameterTypes()[0].newInstance());
+
+            return new Object[][]{{ newUser }};
+
         } catch (Exception e) {
             throw new RuntimeInterruptionException("Could not return object for "
                     + superMethod.getParameterTypes()[0] + "...");
