@@ -277,4 +277,12 @@ public class CoreWebElement {
     public String getCssValue(String s) {
         return this.element.getCssValue(s);
     }
+
+    /**
+     * Method used to scroll to an element
+     */
+    public void scrollToElement() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+                this.element);
+    }
 }

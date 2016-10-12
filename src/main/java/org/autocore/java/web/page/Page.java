@@ -90,4 +90,11 @@ public class Page {
     public void clickBrowserBackButton() {
         driver.navigate().back();
     }
+
+    /**
+     * Method used to scroll to the bottom of a web page.
+     */
+    public void scrollToBottomOfPage() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)", "");
+    }
 }
