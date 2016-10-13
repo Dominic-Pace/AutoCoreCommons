@@ -6,4 +6,10 @@
             <class name="org.autocore.java.unit.commons.utils.JsonUtilsTest"/>
         </classes>
     </test>
+
+    <test name="arrayObjects20184">
+        <classes>
+            <class name="org.autocore.java.unit.commons.utils.JsonUtilsTwo"/>
+        </classes>
+    </test>
 </suite>

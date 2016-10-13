@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "username": "dpace",
+    "firstName": "dominic",
+    "lastName": "pace",
+    "email": "test@test.com",
+    "password": "testP@ssw0rd1!",
+    "phone": "293.291.4910",
+    "userStatus": 0
+  },
+  {
+    "id": 1,
+    "username": "dpace2",
+    "firstName": "dominic",
+    "lastName": "pace",
+    "email": "test@test.com",
+    "password": "testP@ssw0rd2!",
+    "phone": "293.291.4910",
+    "userStatus": 0
+  }
+]

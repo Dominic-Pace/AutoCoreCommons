@@ -6,6 +6,8 @@ import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -42,6 +44,41 @@ public class BaseCoreTest {
                     .getParameterTypes()[0].newInstance());
 
             return new Object[][]{{ newUser }};
+
+        } catch (Exception e) {
+            throw new RuntimeInterruptionException("Could not return object for "
+                    + superMethod.getParameterTypes()[0] + "...");
+        }
+    }
+
+    /**
+     * DataProvider to return the parent class instance in an array.
+     *
+     * @param superMethod Test method invoking this method.
+     * @return instance of the super methods parameter
+     */
+    @DataProvider(name = "CoreDataProviderList")
+    protected static Object[][] getCoreDataProviderArray(Method superMethod,
+                                                      ITestContext context) {
+        List<Object> objectList = new ArrayList<>();
+
+        try {
+            objectList.add(superMethod.getParameterTypes()[0].newInstance());
+
+            Object[] objectArray = objectList.toArray();
+            JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
+                    + context.getName() + JSON_EXTENSION);
+
+            Object[] newUsers = jsonUtils.createArrayOfObjectsFromJsonFile(objectArray);
+
+            Object [][] objects = new Object[newUsers.length][1];
+
+            for (int i = 0; i < newUsers.length; i++) {
+//                System.arraycopy(newUsers, i, objects[i], 0, 1);
+                objects[i][0] = newUsers[i];
+            }
+
+            return objects;
 
         } catch (Exception e) {
             throw new RuntimeInterruptionException("Could not return object for "

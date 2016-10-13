@@ -31,10 +31,22 @@ public class JsonUtils {
         this.reader = new InputStreamReader(JsonUtils.class.getResourceAsStream(jsonFilePath));
     }
 
-    public Object createObjectFromJsonFile(Object objectModelToCreate) {
+    /**
+     * Method used to create a java object from a json file.
+     *
+     * @param objectToCreate - specified dynamic object (POJO format)
+     * @return Plain old Java Object from the JSON file
+     */
+    public Object createObjectFromJsonFile(Object objectToCreate) {
         gson = new GsonBuilder().create();
 
-        return gson.fromJson(reader, objectModelToCreate.getClass());
+        return gson.fromJson(reader, objectToCreate.getClass());
+
+    }
+
+    public Object[] createArrayOfObjectsFromJsonFile(Object[] objectToCreate) {
+        gson = new GsonBuilder().create();
+        return gson.fromJson(reader, objectToCreate.getClass());
 
     }
 }
