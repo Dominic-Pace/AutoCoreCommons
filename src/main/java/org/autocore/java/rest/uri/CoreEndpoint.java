@@ -6,9 +6,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.autocore.java.commons.Config;
-import org.autocore.java.rest.Request;
+import org.autocore.java.rest.utils.Request;
 import org.autocore.java.rest.RestConfig;
+import org.testng.Assert;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -37,4 +37,17 @@ public class CoreEndpoint {
     protected HttpPut put;
     protected HttpGet get;
     protected HttpDelete delete;
+
+    /**
+     * Method used to assert that a response from a request is valid.
+     *
+     * @param res - http response
+     * @return http response instance
+     */
+    public HttpResponse assertValidResponse(HttpResponse res) {
+        Assert.assertTrue(res.getStatusLine().getStatusCode() == 200);
+
+        return res;
+
+    }
 }
