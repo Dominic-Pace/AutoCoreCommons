@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.List;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -44,9 +45,8 @@ public class JsonUtils {
 
     }
 
-    public Object[] createArrayOfObjectsFromJsonFile(Object[] objectToCreate) {
+    public List<Object> createObjectsFromJsonFile(Class<?> objectToCreate) {
         gson = new GsonBuilder().create();
-        return gson.fromJson(reader, objectToCreate.getClass());
-
+        return gson.fromJson(reader, new CoreObjectType<>(objectToCreate) );
     }
 }

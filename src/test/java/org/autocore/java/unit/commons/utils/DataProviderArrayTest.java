@@ -18,11 +18,11 @@ import org.testng.annotations.Test;
  * Lesser General Public License for more details.
  *
  */
-public class JsonUtilsTwo extends BaseCoreTest {
+public class DataProviderArrayTest extends BaseCoreTest {
 
-    @Test(dataProvider = "CoreDataProviderList")
+    @Test(dataProvider = "DataProviderArray")
     public void testCreateObjectsFromJson(User testData) {
-        System.out.println(testData.getId());
+        System.out.println(testData.getUsername());
         System.out.println(testData.getPassword());
     }
 }

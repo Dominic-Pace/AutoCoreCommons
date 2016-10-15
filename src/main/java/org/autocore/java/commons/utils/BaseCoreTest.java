@@ -6,7 +6,6 @@ import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,10 +35,11 @@ public class BaseCoreTest {
      */
     @DataProvider(name = "CoreDataProvider")
     protected static Object[][] getCoreDataProvider(Method superMethod, ITestContext context) {
-        try {
-            JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
-                    + context.getName() + JSON_EXTENSION);
 
+        JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
+                + context.getName() + JSON_EXTENSION);
+
+        try {
             Object newUser = jsonUtils.createObjectFromJsonFile(superMethod
                     .getParameterTypes()[0].newInstance());
 
@@ -60,29 +60,21 @@ public class BaseCoreTest {
     @DataProvider(name = "CoreDataProviderList")
     protected static Object[][] getCoreDataProviderArray(Method superMethod,
                                                       ITestContext context) {
-        List<Object> objectList = new ArrayList<>();
 
-        try {
-            objectList.add(superMethod.getParameterTypes()[0].newInstance());
+        Class<?> superParameterType = superMethod.getParameterTypes()[0];
 
-            Object[] objectArray = objectList.toArray();
-            JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
-                    + context.getName() + JSON_EXTENSION);
+        JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
+                + context.getName() + JSON_EXTENSION);
 
-            Object[] newUsers = jsonUtils.createArrayOfObjectsFromJsonFile(objectArray);
+        List<Object> newUsers;
 
-            Object [][] objects = new Object[newUsers.length][1];
+            newUsers = jsonUtils.createObjectsFromJsonFile(superParameterType);
 
-            for (int i = 0; i < newUsers.length; i++) {
-//                System.arraycopy(newUsers, i, objects[i], 0, 1);
-                objects[i][0] = newUsers[i];
-            }
-
-            return objects;
-
-        } catch (Exception e) {
-            throw new RuntimeInterruptionException("Could not return object for "
-                    + superMethod.getParameterTypes()[0] + "...");
+        Object[] castedObjectArray = new Object[newUsers.size()];
+        for (int i = 0; i < newUsers.size(); i++) {
+            castedObjectArray[i] = newUsers.get(i);
         }
+        return new Object[][] { castedObjectArray };
+
     }
 }

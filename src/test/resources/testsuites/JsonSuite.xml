@@ -9,7 +9,7 @@
 
     <test name="arrayObjects20184">
         <classes>
-            <class name="org.autocore.java.unit.commons.utils.JsonUtilsTwo"/>
+            <class name="org.autocore.java.unit.commons.utils.DataProviderArrayTest"/>
         </classes>
     </test>
 </suite>
