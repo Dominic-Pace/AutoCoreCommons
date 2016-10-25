@@ -24,7 +24,7 @@ import org.testng.Assert;
  * Lesser General Public License for more details.
  *
  */
-public class CoreEndpoint {
+public class CoreEndpoint extends Request {
 
     protected RestConfig config = RestConfig.get();
     protected String restEndpoint = config.getBaseURL() + "/"
@@ -37,6 +37,16 @@ public class CoreEndpoint {
     protected HttpPut put;
     protected HttpGet get;
     protected HttpDelete delete;
+
+    /**
+     * Constructor For Rest Request Helper Class.
+     *
+     * @param httpClient - http client instance
+     * @param endpoint   - base endpoint to make request (no query)
+     */
+    public CoreEndpoint(CloseableHttpClient httpClient, String endpoint) {
+        super(httpClient, endpoint);
+    }
 
     /**
      * Method used to assert that a response from a request is valid.

@@ -2,6 +2,7 @@ package org.autocore.java.unit.commons.utils;
 
 import org.autocore.java.commons.utils.BaseCoreTest;
 import org.autocore.java.models.User;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 /**
@@ -20,7 +21,7 @@ import org.testng.annotations.Test;
  */
 public class DataProviderArrayTest extends BaseCoreTest {
 
-    @Test(dataProvider = "DataProviderArray")
+    @Test(dataProvider = "CoreDataProviderList")
     public void testCreateObjectsFromJson(User testData) {
         System.out.println(testData.getUsername());
         System.out.println(testData.getPassword());

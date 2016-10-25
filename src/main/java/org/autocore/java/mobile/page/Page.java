@@ -14,5 +14,5 @@ package org.autocore.java.mobile.page;
  * Lesser General Public License for more details.
  *
  */
-public class MobilePage {
+public class Page {
 }

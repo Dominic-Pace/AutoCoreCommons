@@ -6,6 +6,8 @@ import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -58,8 +60,8 @@ public class BaseCoreTest {
      * @return instance of the super methods parameter
      */
     @DataProvider(name = "CoreDataProviderList")
-    protected static Object[][] getCoreDataProviderArray(Method superMethod,
-                                                      ITestContext context) {
+    protected static Iterator<Object[]> getCoreDataProviderArray(Method superMethod,
+                                                                ITestContext context) {
 
         Class<?> superParameterType = superMethod.getParameterTypes()[0];
 
@@ -70,11 +72,11 @@ public class BaseCoreTest {
 
             newUsers = jsonUtils.createObjectsFromJsonFile(superParameterType);
 
-        Object[] castedObjectArray = new Object[newUsers.size()];
-        for (int i = 0; i < newUsers.size(); i++) {
-            castedObjectArray[i] = newUsers.get(i);
+        List<Object[]> objects = new ArrayList<>();
+        for (Object user : newUsers) {
+            objects.add(new Object[]{user});
         }
-        return new Object[][] { castedObjectArray };
+        return objects.iterator();
 
     }
 }

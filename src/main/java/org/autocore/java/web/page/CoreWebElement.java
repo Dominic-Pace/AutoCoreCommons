@@ -280,9 +280,13 @@ public class CoreWebElement {
 
     /**
      * Method used to scroll to an element
+     *
+     * @return CoreWebElement instance
      */
-    public void scrollToElement() {
+    public CoreWebElement scrollToElement() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
                 this.element);
+
+        return this;
     }
 }
