@@ -38,6 +38,16 @@ public class Request {
     private HttpPut put;
     private HttpDelete delete;
 
+
+    /**
+     * Constructor For Rest Request Helper Class.
+     *
+     * @param httpClient - http client instance
+     */
+    public Request(CloseableHttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
     /**
      * Constructor For Rest Request Helper Class.
      *

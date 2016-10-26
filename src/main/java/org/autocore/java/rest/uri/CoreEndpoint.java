@@ -42,6 +42,15 @@ public class CoreEndpoint extends Request {
      * Constructor For Rest Request Helper Class.
      *
      * @param httpClient - http client instance
+     */
+    public CoreEndpoint(CloseableHttpClient httpClient) {
+        super(httpClient);
+    }
+
+    /**
+     * Constructor For Rest Request Helper Class.
+     *
+     * @param httpClient - http client instance
      * @param endpoint   - base endpoint to make request (no query)
      */
     public CoreEndpoint(CloseableHttpClient httpClient, String endpoint) {
