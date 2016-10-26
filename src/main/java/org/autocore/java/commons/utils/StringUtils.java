@@ -1,6 +1,7 @@
 package org.autocore.java.commons.utils;
 
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * (C) Copyright 2016 Dominic Pace (https://github.com/Dominic-Pace)
@@ -20,6 +21,7 @@ import com.google.common.base.Preconditions;
  */
 public class StringUtils {
 
+    private static final int STANDARD_STRING_LENGTH = 6;
     /**
      * Method used to check a String is not null
      *
@@ -31,5 +33,89 @@ public class StringUtils {
         Preconditions.checkNotNull(stringToCheck);
 
         return stringToCheck;
+    }
+
+    /**
+     * Method used to create a random alphabetic string given a string name.
+     *
+     * @param stringToAppend - String to add onto.
+     * @return newly redacted string.
+     */
+    public static String RandomAlphabetic(String stringToAppend) {
+        return checkNotNull(stringToAppend + "_"
+                + RandomStringUtils.randomAlphabetic(STANDARD_STRING_LENGTH));
+    }
+
+    /**
+     * Method used to create a random alphabetic string given a string name of a custom length.
+     *
+     * @param stringToAppend - String to add onto
+     * @param stringLength - custom length of string
+     * @return newly redacted string.
+     */
+    public static String RandomAlphabetic(String stringToAppend, int stringLength) {
+        return checkNotNull(stringToAppend + "_"
+                + RandomStringUtils.randomAlphabetic(stringLength));
+    }
+
+    /**
+     * Method used to create a random alphabetic string.
+     *
+     * @return newly redacted string.
+     */
+    public static String RandomAlphabetic() {
+        return checkNotNull(RandomStringUtils.randomAlphabetic(STANDARD_STRING_LENGTH));
+    }
+
+    /**
+     * Method used to create a random alphabetic string of a custom length.
+     *
+     * @param stringLength - custom length of string
+     * @return newly redacted string.
+     */
+    public static String RandomAlphabetic(int stringLength) {
+        return checkNotNull(RandomStringUtils.randomAlphabetic(stringLength));
+    }
+
+    /**
+     * Method used to create a random alphanumeric string given a string name.
+     *
+     * @param stringToAppend - String to add onto.
+     * @return newly redacted string.
+     */
+    public static String createRandomAlphaNumeric(String stringToAppend) {
+        return checkNotNull(stringToAppend + "_"
+                + RandomStringUtils.randomAlphanumeric(STANDARD_STRING_LENGTH));
+    }
+
+    /**
+     * Method used to create a random alphanumeric string given a string name of a custom length.
+     *
+     * @param stringToAppend - String to add onto
+     * @param stringLength - custom length of string
+     * @return newly redacted string.
+     */
+    public static String createRandomAlphaNumeric(String stringToAppend, int stringLength) {
+        return checkNotNull(stringToAppend + "_"
+                + RandomStringUtils.randomAlphanumeric(stringLength));
+    }
+
+    /**
+     * Method used to create a random alphanumeric string.
+     *
+     * @return newly redacted string.
+     */
+    public static String createRandomAlphaNumeric() {
+        return checkNotNull(RandomStringUtils.randomAlphanumeric(STANDARD_STRING_LENGTH));
+    }
+
+    /**
+     * Method used to create a random alphanumeric string of a custom length.
+     *
+     * @param stringLength - custom length of string
+     * @return newly redacted string.
+     */
+    public static String createRandomAlphaNumeric(int stringLength) {
+        return checkNotNull(RandomStringUtils.randomAlphanumeric(stringLength));
     }
 }

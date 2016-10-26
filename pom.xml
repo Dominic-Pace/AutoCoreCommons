@@ -22,6 +22,7 @@
 
     <properties>
         <appium.java.version>4.1.2</appium.java.version>
+        <apache.commmons.lang.version>3.4</apache.commmons.lang.version>
         <http.components.version>4.5.2</http.components.version>
         <selenium.version>2.53.0</selenium.version>
         <testng.version>6.9.10</testng.version>
@@ -34,6 +35,12 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commmons.lang.version}</version>
         </dependency>
 
         <dependency>
