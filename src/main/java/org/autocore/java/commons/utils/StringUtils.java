@@ -41,7 +41,7 @@ public class StringUtils {
      * @param stringToAppend - String to add onto.
      * @return newly redacted string.
      */
-    public static String RandomAlphabetic(String stringToAppend) {
+    public static String createRandomAlphabetic(String stringToAppend) {
         return checkNotNull(stringToAppend + "_"
                 + RandomStringUtils.randomAlphabetic(STANDARD_STRING_LENGTH));
     }
@@ -53,7 +53,7 @@ public class StringUtils {
      * @param stringLength - custom length of string
      * @return newly redacted string.
      */
-    public static String RandomAlphabetic(String stringToAppend, int stringLength) {
+    public static String createRandomAlphabetic(String stringToAppend, int stringLength) {
         return checkNotNull(stringToAppend + "_"
                 + RandomStringUtils.randomAlphabetic(stringLength));
     }
@@ -63,8 +63,9 @@ public class StringUtils {
      *
      * @return newly redacted string.
      */
-    public static String RandomAlphabetic() {
-        return checkNotNull(RandomStringUtils.randomAlphabetic(STANDARD_STRING_LENGTH));
+    public static String createRandomAlphabetic() {
+        return checkNotNull(RandomStringUtils
+                .randomAlphabetic(Integer.valueOf(createRandomNumericValue(1))));
     }
 
     /**
@@ -73,7 +74,7 @@ public class StringUtils {
      * @param stringLength - custom length of string
      * @return newly redacted string.
      */
-    public static String RandomAlphabetic(int stringLength) {
+    public static String createRandomAlphabetic(int stringLength) {
         return checkNotNull(RandomStringUtils.randomAlphabetic(stringLength));
     }
 
@@ -85,7 +86,8 @@ public class StringUtils {
      */
     public static String createRandomAlphaNumeric(String stringToAppend) {
         return checkNotNull(stringToAppend + "_"
-                + RandomStringUtils.randomAlphanumeric(STANDARD_STRING_LENGTH));
+                + RandomStringUtils.randomAlphanumeric(
+                        Integer.valueOf(createRandomNumericValue(1))));
     }
 
     /**
@@ -106,7 +108,8 @@ public class StringUtils {
      * @return newly redacted string.
      */
     public static String createRandomAlphaNumeric() {
-        return checkNotNull(RandomStringUtils.randomAlphanumeric(STANDARD_STRING_LENGTH));
+        return checkNotNull(RandomStringUtils
+                .randomAlphanumeric(Integer.valueOf(createRandomNumericValue(1))));
     }
 
     /**
@@ -117,5 +120,21 @@ public class StringUtils {
      */
     public static String createRandomAlphaNumeric(int stringLength) {
         return checkNotNull(RandomStringUtils.randomAlphanumeric(stringLength));
+    }
+
+    /**
+     * Method used to create a random numeric value of a custom length.
+     *
+     * @param valueLength - custom length of value
+     * @return newly redacted string.
+     */
+    public static String createRandomNumericValue(int valueLength) {
+        String randomIntegerValue = RandomStringUtils.randomNumeric(valueLength);
+
+        if (randomIntegerValue.equals("0")) {
+            randomIntegerValue = RandomStringUtils.randomNumeric(valueLength);
+        }
+        return randomIntegerValue;
+
     }
 }
