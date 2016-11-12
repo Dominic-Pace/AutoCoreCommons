@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,6 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class Page {
 
+    private WebElement element;
     protected WebDriver driver;
     protected String url;
     protected Config config = Config.get();
@@ -73,8 +75,9 @@ public class Page {
         }
     }
 
-    public CoreWebElement getCoreElement(By byLocator) {
-        return Preconditions.checkNotNull(CoreWebElement.getCoreElement(byLocator, driver));
+    public CoreElement getCoreElement(By byLocator) {
+        return Preconditions.checkNotNull(CoreElement.getCoreElement(byLocator, driver));
+
     }
 
     /**
