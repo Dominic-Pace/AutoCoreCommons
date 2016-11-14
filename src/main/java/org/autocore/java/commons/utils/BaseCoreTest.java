@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class BaseCoreTest {
 
+    protected static String BASE_PROJECT_LOCATION = System.getProperty("user.dir");
     private static final String TEST_DATA_LOCATION = File.separator + "testdata" + File.separator;
     private static final String JSON_EXTENSION = ".json";
 
@@ -68,9 +69,7 @@ public class BaseCoreTest {
         JsonUtils jsonUtils = new JsonUtils(TEST_DATA_LOCATION
                 + context.getName() + JSON_EXTENSION);
 
-        List<Object> newUsers;
-
-            newUsers = jsonUtils.createObjectsFromJsonFile(superParameterType);
+        List<Object> newUsers= jsonUtils.createObjectsFromJsonFile(superParameterType);
 
         List<Object[]> objects = new ArrayList<>();
         for (Object user : newUsers) {

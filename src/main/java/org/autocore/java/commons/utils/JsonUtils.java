@@ -45,6 +45,12 @@ public class JsonUtils {
 
     }
 
+    /**
+     * Method used to create multiple objects from a json file.
+     *
+     * @param objectToCreate - the class of the object to create
+     * @return a list of the objects created
+     */
     public List<Object> createObjectsFromJsonFile(Class<?> objectToCreate) {
         gson = new GsonBuilder().create();
         return gson.fromJson(reader, new CoreObjectType<>(objectToCreate) );
