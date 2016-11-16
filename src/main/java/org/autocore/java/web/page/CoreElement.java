@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class CoreElement implements CoreElementInterface {
 
-    private final WebElement element;
     private final WebDriver driver;
     private final By byLocator;
     protected FluentWait<WebDriver> wait;
@@ -39,7 +38,6 @@ public class CoreElement implements CoreElementInterface {
     public CoreElement(By byLocator, WebDriver driver) {
         this.byLocator = byLocator;
         this.driver = Preconditions.checkNotNull(driver);
-        element = Preconditions.checkNotNull(driver.findElement(byLocator));
         if (wait == null) {
             wait = new WebDriverWait(driver, DEFAULT_TIMEOUT, sleepTime)
                     .ignoring(WebDriverException.class);
@@ -58,87 +56,87 @@ public class CoreElement implements CoreElementInterface {
 
     @Override
     public void click() {
-        element.click();
+        driver.findElement(byLocator).click();
     }
 
     @Override
     public void submit() {
-        element.submit();
+        driver.findElement(byLocator).submit();
     }
 
     @Override
     public void sendKeys(CharSequence... charSequences) {
-        element.sendKeys(charSequences);
+        driver.findElement(byLocator).sendKeys(charSequences);
     }
 
     @Override
     public void clear() {
-        element.clear();
+        driver.findElement(byLocator).clear();
     }
 
     @Override
     public String getTagName() {
-        return element.getTagName();
+        return driver.findElement(byLocator).getTagName();
     }
 
     @Override
     public String getAttribute(String s) {
-        return element.getAttribute(s);
+        return driver.findElement(byLocator).getAttribute(s);
     }
 
     @Override
     public boolean isSelected() {
-        return element.isSelected();
+        return driver.findElement(byLocator).isSelected();
     }
 
     @Override
     public boolean isEnabled() {
-        return element.isEnabled();
+        return driver.findElement(byLocator).isEnabled();
     }
 
     @Override
     public String getText() {
-        return element.getText();
+        return driver.findElement(byLocator).getText();
     }
 
     @Override
     public <T extends WebElement> List<T> findElements(By by) {
-        return element.findElements(by);
+        return driver.findElement(byLocator).findElements(by);
     }
 
     @Override
     public <T extends WebElement> T findElement(By by) {
-        return element.findElement(by);
+        return driver.findElement(byLocator).findElement(by);
     }
 
     @Override
     public boolean isDisplayed() {
-        return element.isDisplayed();
+        return driver.findElement(byLocator).isDisplayed();
     }
 
     @Override
     public Point getLocation() {
-        return element.getLocation();
+        return driver.findElement(byLocator).getLocation();
     }
 
     @Override
     public Dimension getSize() {
-        return element.getSize();
+        return driver.findElement(byLocator).getSize();
     }
 
     @Override
     public Rectangle getRect() {
-        return element.getRect();
+        return driver.findElement(byLocator).getRect();
     }
 
     @Override
     public String getCssValue(String s) {
-        return element.getCssValue(s);
+        return driver.findElement(byLocator).getCssValue(s);
     }
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return element.getScreenshotAs(outputType);
+        return driver.findElement(byLocator).getScreenshotAs(outputType);
     }
 
     @Override
@@ -236,7 +234,8 @@ public class CoreElement implements CoreElementInterface {
      * @return if the element is clickable or not
      */
     public boolean isClickable() {
-        return element.isDisplayed() && this.element.isEnabled();
+        return driver.findElement(byLocator).isDisplayed()
+                && driver.findElement(byLocator).isEnabled();
     }
 
 
@@ -244,8 +243,8 @@ public class CoreElement implements CoreElementInterface {
      * Method used to send text to a web element.
      */
     public void clearAndSendText(String textToSend) {
-        element.clear();
-        element.sendKeys(textToSend);
+        driver.findElement(byLocator).clear();
+        driver.findElement(byLocator).sendKeys(textToSend);
 
     }
 
@@ -256,7 +255,7 @@ public class CoreElement implements CoreElementInterface {
      */
     public CoreElement scrollToElement() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                element);
+                driver.findElement(byLocator));
 
         return this;
     }
